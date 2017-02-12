@@ -1,0 +1,21 @@
+{
+  "name": "vampire's_gold",
+  "version": "1.0.0",
+  "description": "socket for Vampire's Gold eye tracking game.",
+  "main": "dataStream.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "sockets",
+    "p5.js",
+    "node"
+  ],
+  "author": "Graeme Burr",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.1",
+    "socket.io": "^1.7.2"
+  },
+  "devDependencies": {}
+}

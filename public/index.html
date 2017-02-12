@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vampire's Gold</title>
+
+	<script language="javascript" type="text/javascript" src="libraries/p5.js"></script>
+	<script language="javascript" type="text/javascript" src="libraries/p5.dom.js"></script>
+	<!-- uncomment lines below to include extra p5 libraries -->
+	<!--<script language="javascript" src="libraries/p5.dom.js"></script>-->
+	<!--<script language="javascript" src="libraries/p5.sound.js"></script>-->
+	<script language="javascript" type="text/javascript" src="dataStream.js"></script>
+	<script language="javascript" type="text/javascript" src="socket.io/socket.io.js"></script>
+	<script language="javascript" type="text/javascript" src="sketch.js"></script>
+	<!--<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>-->
+</head>
+<body>
+<div id="messages"></div>
+<div id="eyedata"></div>
+	
+<script>
+	
+var messageBox = document.querySelector('#messages');
+
+var dotX;
+var dotY;
+
+var socket = io();
+
+socket.on('gaze-data', function(data){
+	var newMessage = document.querySelector('#eyedata');
+	newMessage.innerHTML = data.msg;
+	dotX = data.x / 1
+	dotY = data.y / 1 
+});
+
+	
+</script>
+</body>
+</html>
