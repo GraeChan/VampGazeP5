@@ -3,7 +3,7 @@ var canvas;
 
 function setup() 
 {
-	canvas = createCanvas(1920, 1080);
+	canvas = createCanvas(window.innerWidth, window.innerHeight);
 	
 }
 
