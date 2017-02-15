@@ -6,7 +6,6 @@ function Vampire()
 	this.height = 128;
 	this.xDir = 0;
 	this.yDir = 0;
-	this.direction = 0;
 
 	this.left = true;
 	this.right = false;
