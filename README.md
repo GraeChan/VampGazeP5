@@ -1,3 +1,3 @@
-# VampGoldP5
+# Vampire's Gaze
 
-Vampire's Gold; an eye tracking game made with P5.js.
+Vampire's Gaze; an eye tracking game made with P5.js.
