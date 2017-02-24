@@ -1,4 +1,5 @@
 var canvas;
+var scl = 64;
 var vampire;
 var vamp, coin, shop, sparkle;
 var sparkles;
@@ -33,7 +34,7 @@ function setup()
 	coin.addImage(coinSPrite);
 
 	frameRate(60);
-}
+} 
 
 function draw() {
 	background(44,176,55);
@@ -53,11 +54,15 @@ function draw() {
 	pop();
 
 	push();
-	fill(255,255,255);
-	ellipse(mouseX, mouseY, 15, 15);
+	stroke(255,255,255,200);
+	strokeWeight(2);
+	fill(255,255,255, 200);
+	ellipse(mouseX, mouseY, 30, 15);
+	stroke(0,0,200,200);
+	strokeWeight(2);
+	fill(0,0,0, 200);
+	ellipse(mouseX, mouseY, 5, 5);
 	pop();
-
-	drawSprites();
 
 	debug();
 }
