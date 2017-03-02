@@ -11,25 +11,23 @@ function Mouse()
     this.cursor = function()
     {
         push();
-        mouse.targetX = mouseX;
-        var diffX = mouse.targetX - mouse.x;
-        mouse.x += diffX * mouse.easing;
+        this.targetX = mouseX;
+        var diffX = this.targetX - mouse.x;
+        this.x += diffX * this.easing;
         
-        mouse.targetY = mouseY;
-        var diffY = mouse.targetY - mouse.y;
-        mouse.y += diffY * mouse.easing;
+        this.targetY = mouseY;
+        var diffY = this.targetY - this.y;
+        this.y += diffY * this.easing;
 
         stroke(255,255,255,200);
         strokeWeight(2);
         fill(255,255,255, 200);
-        ellipse(mouse.x, mouse.y, 60, 30);
+        ellipse(this.x, this.y, 60, 30);
         stroke(0,0,200,200);
         strokeWeight(2);
         fill(0,0,0, 200);
-        ellipse(mouse.x, mouse.y, 10, 10);
+        ellipse(this.x, this.y, 10, 10);
 
-        //mouse.targetX = mouseX;
-        //mouse.targetY = mouseY;
         pop();
     }
 }

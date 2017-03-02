@@ -16,6 +16,7 @@ function setup()
 	canvas = createCanvas(window.innerWidth, window.innerHeight);
 	vampire = new Vampire();
 	mouse = new Mouse();
+	gaze = new Gaze();
 
 	var shopSprite = loadImage("sprites/shop.png");
 	shop = createSprite(128,innerHeight-128);
@@ -50,6 +51,7 @@ function draw() {
 	pop();
 
 	mouse.cursor();
+	gaze.cursor();
 	
 	/*push();
 	var targetX = dotX;
