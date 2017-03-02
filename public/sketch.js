@@ -13,7 +13,7 @@ function preload()
 
 function setup() 
 {
-	canvas = createCanvas(window.innerWidth, window.innerHeight);
+	canvas = createCanvas(window.innerWidth, innerHeight-28);
 	vampire = new Vampire();
 	mouse = new Mouse();
 	gaze = new Gaze();
@@ -41,6 +41,8 @@ function setup()
 function draw() {
 	background(44,176,55);
 
+	ui();
+	
 	push();
 	drawSprites();
 	pop();
@@ -75,7 +77,17 @@ function draw() {
 	targetY = dotY;
 	pop();*/
 
+	
 	debug();
+}
+
+function ui()
+{
+	push();
+	noStroke();
+	fill(0,0,0, 15);
+	rect(0,innerHeight-128,innerWidth,128)
+	pop();
 }
 
 function debug()
