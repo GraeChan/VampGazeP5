@@ -2,7 +2,8 @@ var canvas;
 var scl = 64;
 var vampire, sparkles, mouse, gaze;
 var vamp, coin, shop; //, sparkle;
-//var sparkles;
+var previousMillis = 0;
+var interval = 2000;
 
 function preload()
 {
@@ -36,8 +37,6 @@ function setup()
 function draw() {
 	background(44,176,55);
 
-	ui();
-	
 	push();
 	animation(vamp, vampire.x, vampire.y);
 	vampire.move();
@@ -53,6 +52,8 @@ function draw() {
 	drawSprites();
 	pop();
 	
+	ui();
+
 	debug();
 }
 
@@ -64,7 +65,13 @@ function collect(collector, collected)
   //collector.animation.rewind();
   //collected is the sprite in the group collectibles that triggered 
   //the event
-  collected.remove();
+  var currentMillis = millis();
+  if(currentMillis - previousMillis > interval)
+  {
+	  previousMillis = currentMillis;
+	  collected.remove();
+  }
+  
 }
 
 function ui()
@@ -85,5 +92,6 @@ function debug()
 	text("EyePos: " + dotX + "," + dotY, 15, 25);
 	text("MousePos: " + mouseX.toFixed(2) + "," + mouseY.toFixed(2), 15, 50);
 	text("FrameRate: " + frameRate().toFixed(2), 15, 75);
+	text("ms: " + millis().toFixed(2), 15, 100);
 	pop();
 }
