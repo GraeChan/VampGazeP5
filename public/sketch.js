@@ -1,8 +1,8 @@
 var canvas;
 var scl = 64;
-var vampire, mouse;
-var vamp, coin, shop, sparkle;
-var sparkles;
+var vampire, sparkles, mouse, gaze;
+var vamp, coin, shop; //, sparkle;
+//var sparkles;
 
 function preload()
 {
@@ -13,27 +13,22 @@ function preload()
 
 function setup() 
 {
-	canvas = createCanvas(window.innerWidth, innerHeight-28);
+	canvas = createCanvas(window.innerWidth-25, window.innerHeight-25);
 	vampire = new Vampire();
-	mouse = new Mouse();
-	gaze = new Gaze();
+	sparkles = new Sparkles();
 
 	var shopSprite = loadImage("sprites/shop.png");
 	shop = createSprite(128,innerHeight-128);
 	shop.addImage(shopSprite);
 
-	sparkles = new Group();
-	var sparkleSprite = loadImage("sprites/sparkle.png");
-	for(var i = 0; i < 6; i++)
-	{
-		sparkle = createSprite(random(0,innerWidth), random(0,innerHeight));
-		sparkle.addImage(sparkleSprite);
-		sparkles.add(sparkle);
-	}
-	
-	var coinSPrite = loadImage("sprites/coin.png");
+	sparkles.draw();
+
+	var coinSprite = loadImage("sprites/coin.png");
 	coin = createSprite(500,500);
-	coin.addImage(coinSPrite);
+	coin.addImage(coinSprite);
+
+	mouse = new Mouse();
+	gaze = new Gaze();
 
 	frameRate(30);
 } 
@@ -44,41 +39,32 @@ function draw() {
 	ui();
 	
 	push();
-	drawSprites();
-	pop();
-
-	push();
 	animation(vamp, vampire.x, vampire.y);
 	vampire.move();
 	pop();
 
 	mouse.cursor();
-	gaze.cursor();
+	mouse.eye.overlap(sparkles, collect);
 	
-	/*push();
-	var targetX = dotX;
-  	var diffx = eyeX - x;
-  	x += diffx * easing;
-  
-	var targetY = dotY;
-	var diffy = eyeY - y;
-	y += diffy * easing;
+	gaze.cursor();
+	gaze.eye.overlap(sparkles, collect);
 
-	stroke(255,255,255,200);
-	strokeWeight(2);
-	fill(255,255,255, 200);
-	ellipse(x - 200, y - 200, 60, 30);
-	stroke(0,0,200,200);
-	strokeWeight(2);
-	fill(0,0,0, 200);
-	ellipse(x - 200, y - 200, 10, 10);
-
-	targetX = dotX;
-	targetY = dotY;
-	pop();*/
-
+	push();
+	drawSprites();
+	pop();
 	
 	debug();
+}
+
+function collect(collector, collected)
+{
+  //collector is another name for asterisk
+  //show the animation
+  //collector.changeAnimation("stretch");
+  //collector.animation.rewind();
+  //collected is the sprite in the group collectibles that triggered 
+  //the event
+  collected.remove();
 }
 
 function ui()
