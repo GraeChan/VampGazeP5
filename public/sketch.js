@@ -3,13 +3,12 @@ var scl = 64;
 var vampire, sparkles, mouse, gaze;
 var vamp, coin, shop; //, sparkle;
 var previousMillis = 0;
-var interval = 2000;
+var interval = 3000;
 
 function preload()
 {
-	coin = loadImage("sprites/coin.png");
+	//coin = loadImage("sprites/coin.png");
 	vamp = loadAnimation("sprites/vampWalk1.png", "sprites/vampWalk2.png");
-	
 }
 
 function setup() 
@@ -24,9 +23,9 @@ function setup()
 
 	sparkles.draw();
 
-	var coinSprite = loadImage("sprites/coin.png");
-	coin = createSprite(500,500);
-	coin.addImage(coinSprite);
+	//var coinSprite = loadImage("sprites/coin.png");
+	//coin = createSprite(500,500);
+	//coin.addImage(coinSprite);
 
 	mouse = new Mouse();
 	gaze = new Gaze();
@@ -38,38 +37,43 @@ function draw() {
 	background(44,176,55);
 
 	push();
+	drawSprites();
+	pop();
+
+	push();
 	animation(vamp, vampire.x, vampire.y);
 	vampire.move();
 	pop();
+
+	ui();
+
+	debug();
 
 	mouse.cursor();
 	mouse.eye.overlap(sparkles, collect);
 	
 	gaze.cursor();
 	gaze.eye.overlap(sparkles, collect);
-
-	push();
-	drawSprites();
-	pop();
 	
-	ui();
-
-	debug();
 }
 
 function collect(collector, collected)
 {
-  //collector is another name for asterisk
+  //collector is another name for eye
   //show the animation
   //collector.changeAnimation("stretch");
   //collector.animation.rewind();
-  //collected is the sprite in the group collectibles that triggered 
-  //the event
+  //collected is the sparkles
+  
   var currentMillis = millis();
   if(currentMillis - previousMillis > interval)
   {
-	  previousMillis = currentMillis;
 	  collected.remove();
+	  var coinSprite = loadImage("sprites/coin.png");
+	  coin = createSprite(mouse.x,mouse.y);
+	  coin.addImage(coinSprite);
+	  coin.depth = 1;
+	  previousMillis = currentMillis;
   }
   
 }
