@@ -1,7 +1,6 @@
 function Coin()
 {
     this.coin;
-    this.coinSprite;
     this.coinSprite = loadImage("sprites/coin.png");
 
     this.draw = function()

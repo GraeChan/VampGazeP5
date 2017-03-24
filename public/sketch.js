@@ -1,29 +1,26 @@
 var canvas;
 var scl = 64;
-var vampire, sparkles, mouse, gaze, coin;
-var vamp, shop; //, sparkle;
+var vampire, sparkles, mouse, gaze, coin, shop;	// Classes
+var vampAnimWalk;
 var previousMillis = 0;
 var interval = 3000;
 var bIsEyeOverSparkles = false;
 
 function preload()
 {
-	//coin = loadImage("sprites/coin.png");
-	vamp = loadAnimation("sprites/vampWalk1.png", "sprites/vampWalk2.png");
+	vampAnimWalk = loadAnimation("sprites/vampWalk1.png", "sprites/vampWalk2.png");
 }
 
 function setup() 
 {
 	canvas = createCanvas(window.innerWidth-25, window.innerHeight-25);
-	
+
 	vampire = new Vampire();
 	sparkles = new Sparkles();
 	coin = new Coin();
+	shop = new Shop();
 
-	var shopSprite = loadImage("sprites/shop.png");
-	shop = createSprite(128,innerHeight-128);
-	shop.addImage(shopSprite);
-
+	shop.draw();
 	sparkles.draw();
 
 	mouse = new Mouse();
@@ -40,7 +37,7 @@ function draw() {
 	pop();
 
 	push();
-	animation(vamp, vampire.x, vampire.y);
+	animation(vampAnimWalk, vampire.x, vampire.y);
 	vampire.move();
 	pop();
 
