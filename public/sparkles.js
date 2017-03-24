@@ -1,17 +1,16 @@
 function Sparkles()
 {
     this.sparkle;
-    this.sparkleSprite;
+    this.sparkleSprite = loadImage("sprites/sparkle.png");;
     this.sparkles;
     
     this.draw = function()
     {
         sparkles = new Group();
-        sparkleSprite = loadImage("sprites/sparkle.png");
         for(var i = 0; i < 6; i++)
         {
             sparkle = createSprite(random(0,innerWidth), random(0,innerHeight));
-            sparkle.addImage(sparkleSprite);
+            sparkle.addImage(this.sparkleSprite);
             sparkles.add(sparkle);
         }
     }

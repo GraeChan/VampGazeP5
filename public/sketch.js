@@ -1,9 +1,10 @@
 var canvas;
 var scl = 64;
-var vampire, sparkles, mouse, gaze;
-var vamp, coin, shop; //, sparkle;
+var vampire, sparkles, mouse, gaze, coin;
+var vamp, shop; //, sparkle;
 var previousMillis = 0;
 var interval = 3000;
+var bIsEyeOverSparkles = false;
 
 function preload()
 {
@@ -14,18 +15,16 @@ function preload()
 function setup() 
 {
 	canvas = createCanvas(window.innerWidth-25, window.innerHeight-25);
+	
 	vampire = new Vampire();
 	sparkles = new Sparkles();
+	coin = new Coin();
 
 	var shopSprite = loadImage("sprites/shop.png");
 	shop = createSprite(128,innerHeight-128);
 	shop.addImage(shopSprite);
 
 	sparkles.draw();
-
-	//var coinSprite = loadImage("sprites/coin.png");
-	//coin = createSprite(500,500);
-	//coin.addImage(coinSprite);
 
 	mouse = new Mouse();
 	gaze = new Gaze();
@@ -50,10 +49,26 @@ function draw() {
 	debug();
 
 	mouse.cursor();
-	mouse.eye.overlap(sparkles, collect);
-	
 	gaze.cursor();
-	gaze.eye.overlap(sparkles, collect);
+	if(mouse.eye.overlap(sparkles))
+	{
+		mouse.eye.overlap(sparkles, collect);
+	}
+	else if(!mouse.eye.overlap(sparkles))
+	{
+		var currentMillis = millis();
+		previousMillis = currentMillis;
+	}	
+	else if(gaze.eye.overlap(sparkles))
+	{
+		gaze.eye.overlap(sparkles, collect);
+	}
+	else if(!gaze.eye.overlap(sparkles))
+	{
+		var currentMillis = millis();
+		previousMillis = currentMillis;
+	}
+
 	
 }
 
@@ -69,10 +84,7 @@ function collect(collector, collected)
   if(currentMillis - previousMillis > interval)
   {
 	  collected.remove();
-	  var coinSprite = loadImage("sprites/coin.png");
-	  coin = createSprite(mouse.x,mouse.y);
-	  coin.addImage(coinSprite);
-	  coin.depth = 1;
+	  coin.draw();
 	  previousMillis = currentMillis;
   }
   
