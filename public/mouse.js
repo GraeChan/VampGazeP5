@@ -39,5 +39,70 @@ function Mouse()
         pop();
     }
 
+    this.hover = function()
+    {
+        var currentMillis = millis();
+        
+        if(this.eye.overlap(sparkles.sparkles || sparkles.sparkle))
+        {
+            this.eye.overlap(sparkles.sparkles, this.collectSparkle);
+        }
+        else if (!this.eye.overlap(sparkles.sparkles) ) 
+        {
+            previousMillis = currentMillis;
+        }
+        
+        if(this.eye.overlap(coin.coins))
+        {
+            this.eye.overlap(coin.coins, this.collectCoin);
+        }
+        else if (!this.eye.overlap(coin.coins || coin.coin) ) 
+        {
+            previousMillisCoin = currentMillis;
+        }
+    }
+
+    this.collectSparkle = function(collector, collected)
+    {
+    //collector is the eye
+    //show the animation
+    //collector.changeAnimation("stretch");
+    //collector.animation.rewind();
+    //collected is the sparkles
     
+        var currentMillis = millis();
+        text("collect: " , 50, 100);
+        
+        if(currentMillis - previousMillis > interval)
+        {
+            collected.remove();
+            sparkles.drawNew();
+            coin.draw();
+            
+            previousMillis = currentMillis;
+            //previousMillisCoin = currentMillis;
+        }
+    
+    }
+
+    this.collectCoin = function(collector, collected)
+    {
+    //collector is the eye
+    //show the animation
+    //collector.changeAnimation("stretch");
+    //collector.animation.rewind();
+    //collected is the coins
+
+        var currentMillis = millis();
+        text("collectCoin: " , 50, 100);
+        
+        if(currentMillis - previousMillisCoin > interval)
+        {
+            collected.remove();
+            coin.coinTotal += 1;
+            previousMillisCoin = currentMillis;
+        }
+        
+    }
+
 }
