@@ -7,53 +7,79 @@ function Vampire()
 	this.xDir = 0;
 	this.yDir = 0;
 
-	this.left = true;
+	this.left = false;
 	this.right = false;
 	this.up = false;
 	this.down = false;
 
 	this.direction = function()
 	{
-		if(this.left == true)
+		if(this.x - mouse.x >= 0)
 		{
-			this.right = true;
-		}
-		if (this.right == true)
-		{
+			this.right = false;
 			this.left = true;
+		}
+		else if(this.x - mouse.x < 0)
+		{
+			this.left = false;
+			this.right = true;
 		}
 	}
 
 	this.move = function()
 	{
-		if(vampire.left == true)
+		this.direction();
+
+		if(this.left == true)
 		{
-			if(vampire.x > window.innerWidth/1.25)
+			if(this.y > window.innerHeight - shop.height && this.x > shop.width + this.width/2)
 			{
-				vampire.x-=1;
+				if(this.x > mouse.x)
+				{
+					this.x-=1;
+				}
+				
 			}
-			else
+			if(this.y > window.innerHeight - shop.height && this.x <= shop.width + this.width/2)
 			{
-				vampire.left = false;
-				vampire.right = true;
-			}
-		}
-		
-		if(vampire.right == true)
-		{
-			if (vampire.x <= window.innerWidth - this.width)
-			{
-				vampire.x+=1;
-			}
-			else
-			{
-				vampire.left = true;
-				vampire.right = false;
+				this.y-=1;
 			}
 			
 		}
 		
+		if(this.right == true)
+		{
+			if (this.x <= mouse.x)
+			{
+				this.x+=1;
+			}
+			
+			
+		}
 		
+		if(this.up == true)
+		{
+			if(this.y > mouse.y)
+			{
+				this.y-=1;
+			}
+			
+			
+		}
+
+		if(this.down == true)
+		{
+			if (this.x <= mouse.y)
+			{
+				this.x+=1;
+			}
+			else
+			{
+				this.left = true;
+				this.right = false;
+			}
+			
+		}
 	
 	}
 
