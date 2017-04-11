@@ -57,15 +57,9 @@ function draw() {
 	gaze.cursor();
 
 	mouse.hover();
-	//mouse.eye.collide(shop.shop);
-	//mouse.eye.collide(castle.castle);
-	//vampAnimWalk.collide(shop.shop);
-  	//vampAnimWalk.collide(castle.castle);
 
 	drawSprites();
 
-	
-	
 	ui();
 }
 
