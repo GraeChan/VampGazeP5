@@ -18,27 +18,37 @@ function Vampire()
 
 	this.direction = function()
 	{
-		if(this.x - mouse.x >= 0)
+		if(this.x - mouse.x > 10)
 		{
 			this.left = true;
 			this.right = false;
 		}
-		else if(this.x - mouse.x < 0)
+		else if(this.x - mouse.x < -10)
 		{
 			this.left = false;
 			this.right = true;
 		}
+		else
+		{
+			this.left = false;
+			this.right = false;
+		}
 		
 
-		if(this.y - mouse.y >= 0)
+		if(this.y - mouse.y > 10)
 		{
 			this.up = true;
 			this.down = false;
 		}
-		else if(this.y - mouse.y < 0)
+		else if(this.y - mouse.y < -10)
 		{
 			this.up = false;
 			this.down = true;
+		}
+		else
+		{
+			this.up = false;
+			this.down = false;
 		}
 	}
 
