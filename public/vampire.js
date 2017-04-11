@@ -1,5 +1,9 @@
 function Vampire()
 {
+	this.vampire = createSprite(this.x, this.y);
+	this.vampire.addAnimation("walk", "sprites/vampWalk1.png", "sprites/vampWalk2.png");
+	this.vampire.depth = 3;
+	
 	this.x = window.innerWidth - 100;
 	this.y = window.innerHeight -  100;
 	this.width = 90;
@@ -16,13 +20,25 @@ function Vampire()
 	{
 		if(this.x - mouse.x >= 0)
 		{
-			this.right = false;
 			this.left = true;
+			this.right = false;
 		}
 		else if(this.x - mouse.x < 0)
 		{
 			this.left = false;
 			this.right = true;
+		}
+		
+
+		if(this.y - mouse.y >= 0)
+		{
+			this.up = true;
+			this.down = false;
+		}
+		else if(this.y - mouse.y < 0)
+		{
+			this.up = false;
+			this.down = true;
 		}
 	}
 
@@ -32,52 +48,27 @@ function Vampire()
 
 		if(this.left == true)
 		{
-			if(this.y > window.innerHeight - shop.height && this.x > shop.width + this.width/2)
-			{
-				if(this.x > mouse.x)
-				{
-					this.x-=1;
-				}
-				
-			}
-			if(this.y > window.innerHeight - shop.height && this.x <= shop.width + this.width/2)
-			{
-				this.y-=1;
-			}
+			this.vampire.mirrorX(+1);
+			this.x-=1;
 			
 		}
 		
 		if(this.right == true)
 		{
-			if (this.x <= mouse.x)
-			{
-				this.x+=1;
-			}
-			
-			
+			this.vampire.mirrorX(-1);
+			this.x+=1;
 		}
 		
 		if(this.up == true)
 		{
-			if(this.y > mouse.y)
-			{
-				this.y-=1;
-			}
 			
+			this.y-=1;
 			
 		}
 
 		if(this.down == true)
 		{
-			if (this.x <= mouse.y)
-			{
-				this.x+=1;
-			}
-			else
-			{
-				this.left = true;
-				this.right = false;
-			}
+			this.y+=1;
 			
 		}
 	
