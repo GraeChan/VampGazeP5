@@ -65,18 +65,15 @@ function Mouse()
     this.collectSparkle = function(collector, collected)
     {
     //collector is the eye
-    //show the animation
-    //collector.changeAnimation("stretch");
-    //collector.animation.rewind();
     //collected is the sparkles
     
         var currentMillis = millis();
-        text("collect: " , 50, 100);
+        //text("collect: " , 50, 100);
         
         if(currentMillis - previousMillis > interval)
         {
             collected.remove();
-            sparkles.drawNew();
+            //sparkles.draw();
             coin.draw();
             
             previousMillis = currentMillis;
@@ -88,18 +85,16 @@ function Mouse()
     this.collectCoin = function(collector, collected)
     {
     //collector is the eye
-    //show the animation
-    //collector.changeAnimation("stretch");
-    //collector.animation.rewind();
     //collected is the coins
 
         var currentMillis = millis();
-        text("collectCoin: " , 50, 100);
+        //text("collectCoin: " , 50, 100);
         
         if(currentMillis - previousMillisCoin > interval)
         {
             collected.remove();
             coin.coinTotal += 1;
+            sparkles.draw();
             previousMillisCoin = currentMillis;
         }
         
