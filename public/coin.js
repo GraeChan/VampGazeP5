@@ -4,15 +4,27 @@ function Coin()
     this.coinTotal = 0;
     this.coinUI;
     this.coinSprite = loadImage("sprites/coin.png");
-    this.coins;
+    this.coins = new Group();
 
     this.draw = function()
     {
+        push();
         this.coin = createSprite(mouse.x,mouse.y);
         this.coin.addImage(this.coinSprite);
         
         this.coins.add(this.coin);
         this.coin.depth = 1;
+        pop();
+    }
+
+    this.check = function()
+    {
+        for(var i = 0; i<this.coins.length; i++) 
+        {
+            var c = this.coins[i];
+            
+            c.position.y += sin(frameCount/10);
+        }
     }
 
     this.drawUiCoin = function()
