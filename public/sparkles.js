@@ -9,7 +9,7 @@ function Sparkles()
     this.draw = function()
     {
         //sparkles = new Group();
-        if(this.sparkles.length < 6)
+        //if(this.sparkles.length < 6)
         //for(var i = 0; i < this.sparklesMax; i++)
         {
             this.sparkle = createSprite(random(200,innerWidth-200), random(200,innerHeight-200));
@@ -31,7 +31,7 @@ function Sparkles()
                 var s = this.sparkles[i];
                 
                 //s.position.y += sin(frameCount/10);
-                s.scale += cos(frameCount/2.5);
+                s.scale += cos(frameCount/2);
             }
         }
     }

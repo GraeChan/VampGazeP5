@@ -1,7 +1,7 @@
 function Coin()
 {
     this.coin
-    this.coinTotal = 0;
+    this.coinTotal = 10;
     this.coinUI;
     this.coinSprite = loadImage("sprites/coin.png");
     this.coins = new Group();

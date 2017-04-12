@@ -11,44 +11,44 @@ function Vampire()
 	this.xDir = 0;
 	this.yDir = 0;
 
-	this.left = false;
-	this.right = false;
-	this.up = false;
-	this.down = false;
+	this.bIsLeft = false;
+	this.bIsRight = false;
+	this.bIsUp = false;
+	this.bIsDown = false;
 
 	this.direction = function()
 	{
 		if(this.x - mouse.x > 10)
 		{
-			this.left = true;
-			this.right = false;
+			this.bIsLeft = true;
+			this.bIsRight = false;
 		}
 		else if(this.x - mouse.x < -10)
 		{
-			this.left = false;
-			this.right = true;
+			this.bIsLeft = false;
+			this.bIsRight = true;
 		}
 		else
 		{
-			this.left = false;
-			this.right = false;
+			this.bIsLeft = false;
+			this.bIsRight = false;
 		}
 		
 
 		if(this.y - mouse.y > 10)
 		{
-			this.up = true;
-			this.down = false;
+			this.bIsUp = true;
+			this.bIsDown = false;
 		}
 		else if(this.y - mouse.y < -10)
 		{
-			this.up = false;
-			this.down = true;
+			this.bIsUp = false;
+			this.bIsDown = true;
 		}
 		else
 		{
-			this.up = false;
-			this.down = false;
+			this.bIsUp = false;
+			this.bIsDown = false;
 		}
 	}
 
@@ -56,27 +56,27 @@ function Vampire()
 	{
 		this.direction();
 
-		if(this.left == true)
+		if(this.bIsLeft == true)
 		{
 			this.vampire.mirrorX(+1);
 			this.x-=1;
 			
 		}
 		
-		if(this.right == true)
+		if(this.bIsRight == true)
 		{
 			this.vampire.mirrorX(-1);
 			this.x+=1;
 		}
 		
-		if(this.up == true)
+		if(this.bIsUp == true)
 		{
 			
 			this.y-=1;
 			
 		}
 
-		if(this.down == true)
+		if(this.bIsDown == true)
 		{
 			this.y+=1;
 			
