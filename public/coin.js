@@ -2,7 +2,8 @@ function Coin()
 {
     this.coin
     this.coinTotal = 10;
-    this.coinUI;
+    this.coinUI_1;
+    this.coinUI_2;
     this.coinSprite = loadImage("sprites/coin.png");
     this.coins = new Group();
 
@@ -30,14 +31,14 @@ function Coin()
     this.drawUiCoin = function()
     {
         push();
-            this.coinUI = createSprite(110, innerHeight-198);
-            this.coinUI.addImage(this.coinSprite);
-            this.coinUI.scale = 0.5;
+            this.coinUI_1 = createSprite(110, innerHeight-198);
+            this.coinUI_1.addImage(this.coinSprite);
+            this.coinUI_1.scale = 0.5;
         pop();
         push();
-            this.coinUI = createSprite(50, 25);
-            this.coinUI.addImage(this.coinSprite);
-            this.coinUI.scale = 0.5;
+            this.coinUI_2 = createSprite(50, 25);
+            this.coinUI_2.addImage(this.coinSprite);
+            this.coinUI_2.scale = 0.5;
         pop();
     }
 }
