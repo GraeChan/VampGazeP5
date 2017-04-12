@@ -7,8 +7,9 @@ function Mouse()
     this.easing = 0.1;
     this.diffX; //= targetX - x;
     this.diffY; //= targetY - y;
-    this.eyeSprite = loadImage("sprites/coin.png");
+    this.eyeSprite = loadImage("sprites/eyes.png");
     this.eye = createSprite(this.x,this.y);
+    this.hammerSprite = loadImage("sprites/shop.png"); 
 
     this.cursor = function()
     {
@@ -60,6 +61,16 @@ function Mouse()
         {
             previousMillisCoin = currentMillis;
         }
+
+        if(coin.coinTotal >= 10 && this.eye.overlap(shop.shop))
+        {
+            this.eye.overlap(shop.shop, this.collectHammer)
+            
+        }
+        else if(!this.eye.overlap(shop.shop))
+        {
+            previousMillisHammer = currentMillis;
+        }
     }
 
     this.collectSparkle = function(collector, collected)
@@ -96,6 +107,24 @@ function Mouse()
             coin.coinTotal += 1;
             sparkles.draw();
             previousMillisCoin = currentMillis;
+        }
+        
+    }
+
+    this.collectHammer = function(collector, collected)
+    {
+    //collector is the eye
+    //collected is the Hammer from shop
+
+        var currentMillis = millis();
+        //text("collectCoin: " , 50, 100);
+        
+        if(currentMillis - previousMillisHammer > interval)
+        {
+            //collected.remove();
+            coin.coinTotal -= 10;
+            //sparkles.draw();
+            previousMillisHammer = currentMillis;
         }
         
     }

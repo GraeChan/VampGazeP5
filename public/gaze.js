@@ -8,8 +8,9 @@ function Gaze()
     this.diffX; //= targetX - x;
     this.diffY; //= targetY - y;
     this.offset = 200;
-    this.eyeSprite = loadImage("sprites/coin.png");
+    this.eyeSprite = loadImage("sprites/eyes.png");
     this.eye = createSprite(this.x,this.y);
+    this.hammerSprite = loadImage("sprites/shop.png"); 
 
     this.cursor = function()
     {
