@@ -9,6 +9,7 @@ var bIsGameScreen = false;
 var bIsMenuScreen = true;
 var logo;
 var logoSprite;
+var bIsEye = true;
 
 function setup() 
 {
@@ -84,6 +85,8 @@ function draw() {
 		mouse.cursor();
 		mouse.hover();
 
+		mouse.check();
+
 		//For Gaze Control
 		//gaze.cursor();
 
@@ -132,6 +135,7 @@ function debug()
 	text("prevMsCoin: " + previousMillisCoin.toFixed(2), 15, 200);
 	text("sparkles: " + sparkles.sparkles.length, 15, 225);
 	text("coins: " + coin.coins.length, 15, 250);*/
+	text("bIsEye: " + bIsEye, 15, 300);
 	pop();
 
 }

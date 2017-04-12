@@ -7,12 +7,18 @@ function Mouse()
     this.easing = 0.1;
     this.diffX; //= targetX - x;
     this.diffY; //= targetY - y;
-    this.eyeSprite = loadImage("sprites/eyes.png");
+
     this.eye = createSprite(this.x,this.y);
-    this.hammerSprite = loadImage("sprites/shop.png"); 
+    this.eye.addAnimation("eyes", "sprites/eyes.png");
+    this.eye.addAnimation("hammer", "sprites/hammer.png");
+    this.eye.playing = false;
+    
+    animation(this.eye, this.x,this.y);
 
     this.cursor = function()
     {
+        
+
         push();
         this.targetX = mouseX;
         var diffX = this.targetX - this.x;
@@ -24,9 +30,10 @@ function Mouse()
 
         //var eyeSprite = loadImage("sprites/coin.png");
         //coin = createSprite(this.x,this.y);
-        this.eye.addImage(this.eyeSprite);
+        
         this.eye.position.x = this.x;
         this.eye.position.y = this.y;
+        
 
         /*stroke(255,255,255,200);
         strokeWeight(2);
@@ -38,6 +45,7 @@ function Mouse()
         ellipse(this.x, this.y, 10, 10);*/
         
         pop();
+
     }
 
     this.hover = function()
@@ -66,10 +74,25 @@ function Mouse()
         {
             this.eye.overlap(shop.shop, this.collectHammer)
             
+            
         }
         else if(!this.eye.overlap(shop.shop))
         {
             previousMillisHammer = currentMillis;
+        }
+
+        
+    }
+
+    this.check = function()
+    {
+        if(bIsEye == true)
+        {
+            mouse.eye.changeAnimation("eyes");
+        }
+        if(bIsEye == false)
+        {
+            mouse.eye.changeAnimation("hammer");
         }
     }
 
@@ -121,9 +144,13 @@ function Mouse()
         
         if(currentMillis - previousMillisHammer > interval)
         {
+            
             //collected.remove();
             coin.coinTotal -= 10;
-            //sparkles.draw();
+            
+            bIsEye = false;
+            //bIsHammer = true;
+            
             previousMillisHammer = currentMillis;
         }
         
