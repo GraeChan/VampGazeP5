@@ -1,38 +1,27 @@
 var canvas;
 var scl = 64;
 var vampire, sparkles, mouse, gaze, coin, shop, castle;	// Classes
-//var vampAnimWalk;
 var previousMillis = 0;
 var previousMillisCoin = 0;
+var previousMillisHammer = 0;
 var interval = 3000;
-
-
-function preload()
-{
-	//vampAnimWalk = loadAnimation("sprites/vampWalk1.png", "sprites/vampWalk2.png");
-}
+var bIsGameScreen = false;
+var bIsMenuScreen = true;
+var logo;
+var logoSprite;
 
 function setup() 
 {
 	canvas = createCanvas(window.innerWidth-25, window.innerHeight-25);
 
-	
 	sparkles = new Sparkles();
 	coin = new Coin();
-	vampire = new Vampire();
 	
 	shop = new Shop();
 	castle = new Castle();
 
-	shop.draw();
-	castle.draw();
-	sparkles.sparkles = new Group();
-	sparkles.draw();
-	//coin.coins = new Group();
-	coin.drawUiCoin();
-	
-	mouse = new Mouse();
-	gaze = new Gaze();
+	logo = createSprite(innerWidth-250,innerHeight-126);
+	logoSprite = loadImage("sprites/napierLogo.gif");
 
 	frameRate(30);
 } 
@@ -40,27 +29,78 @@ function setup()
 function draw() {
 	background(44,176,55);
 
-	coin.check();
-	sparkles.check();
+	if(bIsMenuScreen == true)
+	{
+		push();
+			fill(255, 255, 0);
+			textSize(32);
+			text("Vampire's Gaze", innerWidth/2 - 25, 50);
+			text("吸血鬼の視線" , innerWidth/2 - 25, 100);
+			text("Avoid the Vampire's Gaze", 150, 250);
+			text("Collect Coins", 150, 300);
+			text("Buy Hammer to Chase and Defeat Vampire", 150, 350);
+			text("Press Enter or Click Left Mouse Button to Start", 150, 500);
+		pop();
 
-	push();
-	vampire.move();
-	vampire.vampire.position.x = vampire.x;
-	vampire.vampire.position.y = vampire.y;
-	vampire.vampire.collide(shop.shop);
-	vampire.vampire.collide(castle.castle);
-	pop();
+		logo.addImage(this.logoSprite	);
 
-	debug();
+		drawSprites();
+		
 
-	mouse.cursor();
-	gaze.cursor();
+		if(keyWentDown("Enter") || mouseWentDown(LEFT))
+    	{
+			bIsMenuScreen = false;
+			bIsGameScreen = true;
 
-	mouse.hover();
+			logo.remove();
+			shop.draw();
+			castle.draw();
+			sparkles.sparkles = new Group();
+			sparkles.draw();
+			//coin.coins = new Group();
+			coin.drawUiCoin();
 
-	drawSprites();
+			vampire = new Vampire();
+			mouse = new Mouse();
+			//gaze = new Gaze();
+		}
+	}
+	else if(bIsGameScreen== true)
+	{
+		coin.check();
+		sparkles.check();
 
-	ui();
+		push();
+		vampire.move();
+		vampire.vampire.position.x = vampire.x;
+		vampire.vampire.position.y = vampire.y;
+		vampire.vampire.collide(shop.shop);
+		vampire.vampire.collide(castle.castle);
+		pop();
+
+		debug();
+
+		//For Mouse Control
+		mouse.cursor();
+		mouse.hover();
+
+		//For Gaze Control
+		//gaze.cursor();
+
+		drawSprites();
+
+		ui();
+
+		if(keyWentDown("Esc"))
+    	{
+			bIsGameScreen = false;
+			bIsPauseScreen = false;
+			bIsMenuScreen = true;
+		}
+		
+	}
+	
+	
 }
 
 function ui()
