@@ -21,6 +21,17 @@ function setup()
 	shop = new Shop();
 	castle = new Castle();
 
+	shop.draw();
+	castle.draw();
+	sparkles.sparkles = new Group();
+	sparkles.draw();
+	coin.coins = new Group();
+	coin.drawUiCoin();
+
+	vampire = new Vampire();
+	mouse = new Mouse();
+	//gaze = new Gaze();
+
 	logo = createSprite(innerWidth-250,innerHeight-126);
 	logoSprite = loadImage("sprites/napierLogo.gif");
 
@@ -43,7 +54,17 @@ function draw() {
 			text("Press Enter or Click Left Mouse Button to Start", 150, 500);
 		pop();
 
+		logo.removed = false;
 		logo.addImage(this.logoSprite	);
+
+		shop.shop.removed = true;
+		castle.castle.removed = true;
+		sparkles.sparkle.removed = true;
+		coin.removed = true;
+		coin.coinUI_1.removed = true;
+		coin.coinUI_2.removed = true;
+		mouse.eye.removed = true;
+		vampire.vampire.removed = true;
 
 		drawSprites();
 		
@@ -53,17 +74,16 @@ function draw() {
 			bIsMenuScreen = false;
 			bIsGameScreen = true;
 
-			logo.remove();
-			shop.draw();
-			castle.draw();
-			sparkles.sparkles = new Group();
-			sparkles.draw();
-			//coin.coins = new Group();
-			coin.drawUiCoin();
-
-			vampire = new Vampire();
-			mouse = new Mouse();
-			//gaze = new Gaze();
+			logo.removed = true;
+			
+			shop.shop.removed = false;
+			castle.castle.removed = false;
+			sparkles.sparkle.removed = false;
+			coin.removed = false;
+			coin.coinUI_1.removed = false;
+			coin.coinUI_2.removed = false;
+			mouse.eye.removed = false;
+			vampire.vampire.removed = false;
 		}
 	}
 	else if(bIsGameScreen== true)
@@ -97,7 +117,6 @@ function draw() {
 		if(keyWentDown("Esc"))
     	{
 			bIsGameScreen = false;
-			bIsPauseScreen = false;
 			bIsMenuScreen = true;
 		}
 		
@@ -135,7 +154,7 @@ function debug()
 	text("prevMsCoin: " + previousMillisCoin.toFixed(2), 15, 200);
 	text("sparkles: " + sparkles.sparkles.length, 15, 225);
 	text("coins: " + coin.coins.length, 15, 250);*/
-	text("bIsEye: " + bIsEye, 15, 300);
+	//text("bIsEye: " + bIsEye, 15, 300);
 	pop();
 
 }
