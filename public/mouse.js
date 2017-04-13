@@ -27,9 +27,6 @@ function Mouse()
         this.targetY = mouseY;
         var diffY = this.targetY - this.y;
         this.y += diffY * this.easing;
-
-        //var eyeSprite = loadImage("sprites/coin.png");
-        //coin = createSprite(this.x,this.y);
         
         this.eye.position.x = this.x;
         this.eye.position.y = this.y;
