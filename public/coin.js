@@ -1,21 +1,21 @@
 function Coin()
 {
-    this.coin
+    this.coin;
     this.coinTotal = 10;
     this.coinUI_1;
     this.coinUI_2;
     this.coinSprite = loadImage("sprites/coin.png");
-    this.coins = new Group();
+    this.coins;
 
     this.draw = function()
     {
-        push();
+       
         this.coin = createSprite(mouse.x,mouse.y);
         this.coin.addImage(this.coinSprite);
         
         this.coins.add(this.coin);
         this.coin.depth = 1;
-        pop();
+        
     }
 
     this.check = function()

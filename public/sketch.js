@@ -12,6 +12,7 @@ var bIsCreditsScreen = false;
 var logo, title;
 var logoSprite, titleSprite;
 var bIsEye = true;
+var heart, heartSprite;
 
 function setup() 
 {
@@ -69,6 +70,11 @@ function start()
 	bIsHelpScreen = false;
 	bIsCreditsScreen = false;
 
+	buttonStart.hide();
+	buttonHelp.hide();
+	buttonCredits.hide();
+	buttonBack.hide();
+
 	logo.removed = true;
 	title.removed = true;
 	
@@ -76,15 +82,18 @@ function start()
 	castle.castle.removed = false;
 	sparkles.sparkle.removed = false;
 	coin.removed = false;
+	for(var i = 0; i<coin.coins.length; i++) 
+	{
+		var c = coin.coins[i];
+		
+		c.removed = false;
+	}
 	coin.coinUI_1.removed = false;
 	coin.coinUI_2.removed = false;
 	mouse.eye.removed = false;
 	vampire.vampire.removed = false;
 
-	buttonStart.hide();
-	buttonHelp.hide();
-	buttonCredits.hide();
-	buttonBack.hide();
+	
 }
 
 function help()
@@ -145,7 +154,12 @@ function draw() {
 		shop.shop.removed = true;
 		castle.castle.removed = true;
 		sparkles.sparkle.removed = true;
-		coin.removed = true;
+		for(var i = 0; i<coin.coins.length; i++) 
+		{
+			var c = coin.coins[i];
+			
+			c.removed = true;
+		}
 		coin.coinUI_1.removed = true;
 		coin.coinUI_2.removed = true;
 		mouse.eye.removed = true;
