@@ -5,7 +5,7 @@ var previousMillis = 0;
 var previousMillisCoin = 0;
 var previousMillisHammer = 0;
 var previousMillisVamp = 0;
-var interval = 3000;
+var interval = 1000;
 var bIsGameScreen = false;
 var bIsMenuScreen = true;
 var bIsHelpScreen = false;
@@ -37,8 +37,8 @@ function setup()
 	heart.draw();
 
 	vampire = new Vampire();
-	mouse = new Mouse();
-	//gaze = new Gaze();
+	//mouse = new Mouse();
+	gaze = new Gaze();
 
 	logo = createSprite(innerWidth-250,775);
 	logoSprite = loadImage("sprites/napierLogo.gif");
@@ -101,7 +101,8 @@ function start()
 	coin.coinUI_1.removed = false;
 	coin.coinUI_2.removed = false;
 	heart.heart.removed = false;
-	mouse.eye.removed = false;
+	//mouse.eye.removed = false;
+	gaze.eye.removed = false;
 	vampire.vampire.removed = false;
 	
 	heart.lives = 3;
@@ -186,7 +187,8 @@ function draw() {
 		coin.coinUI_1.removed = true;
 		coin.coinUI_2.removed = true;
 		heart.heart.removed = true;
-		mouse.eye.removed = true;
+		//mouse.eye.removed = true;
+		gaze.eye.removed = true;
 		vampire.vampire.removed = true;
 
 		buttonStart.show();
@@ -213,12 +215,14 @@ function draw() {
 		debug();
 
 		//For Mouse Control
-		mouse.cursor();
-		mouse.hover();
-		mouse.check();
+		//mouse.cursor();
+		//mouse.hover();
+		//mouse.check();
 
 		//For Gaze Control
-		//gaze.cursor();
+		gaze.cursor();
+		gaze.hover();
+		gaze.check();
 
 		drawSprites();
 

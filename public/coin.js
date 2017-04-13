@@ -10,7 +10,7 @@ function Coin()
     this.draw = function()
     {
        
-        this.coin = createSprite(mouse.x,mouse.y);
+        this.coin = createSprite(gaze.x,gaze.y);
         this.coin.addImage(this.coinSprite);
         
         this.coins.add(this.coin);

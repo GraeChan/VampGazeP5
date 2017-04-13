@@ -27,8 +27,6 @@ function Mouse()
         this.targetY = mouseY;
         var diffY = this.targetY - this.y;
         this.y += diffY * this.easing;
-
-        
         
         this.eye.position.x = this.x;
         this.eye.position.y = this.y;
@@ -150,12 +148,9 @@ function Mouse()
         
         if(currentMillis - previousMillisHammer > interval)
         {
-            
-            //collected.remove();
             coin.coinTotal -= 10;
             
             bIsEye = false;
-            //bIsHammer = true;
             
             previousMillisHammer = currentMillis;
         }

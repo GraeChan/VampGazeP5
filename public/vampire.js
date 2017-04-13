@@ -21,12 +21,12 @@ function Vampire()
 	{
 		if(bIsEye == true)
 		{
-			if(this.x - mouse.x > 10)
+			if(this.x - gaze.eye.position.x  > 10)
 			{
 				this.bIsLeft = true;
 				this.bIsRight = false;
 			}
-			else if(this.x - mouse.x < -10)
+			else if(this.x - gaze.eye.position.x < -10)
 			{
 				this.bIsLeft = false;
 				this.bIsRight = true;
@@ -38,12 +38,12 @@ function Vampire()
 			}
 			
 
-			if(this.y - mouse.y > 10)
+			if(this.y - gaze.eye.position.y > 10)
 			{
 				this.bIsUp = true;
 				this.bIsDown = false;
 			}
-			else if(this.y - mouse.y < -10)
+			else if(this.y - gaze.eye.position.y < -10)
 			{
 				this.bIsUp = false;
 				this.bIsDown = true;
@@ -56,12 +56,12 @@ function Vampire()
 		}
 		else if(bIsEye == false)
 		{
-			if(this.x - mouse.x > 10 && this.x < innerWidth - this.width/2)
+			if(this.x - gaze.eye.position.x > 10 && this.x < innerWidth - this.width/2)
 			{
 				this.bIsLeft = false;
 				this.bIsRight = true;
 			}
-			else if(this.x - mouse.x < -10 && this.x > 0 + this.width/2)
+			else if(this.x - gaze.eye.position.x < -10 && this.x > 0 + this.width/2)
 			{
 				this.bIsLeft = true;
 				this.bIsRight = false;
@@ -73,12 +73,12 @@ function Vampire()
 			}
 			
 
-			if(this.y - mouse.y > 10 && this.y < innerHeight - this.height/2)
+			if(this.y - gaze.eye.position.y > 10 && this.y < innerHeight - this.height/2)
 			{
 				this.bIsUp = false;
 				this.bIsDown = true;
 			}
-			else if(this.y - mouse.y < -10 && this.y > 0 + this.height/2)
+			else if(this.y - gaze.eye.position.y < -10 && this.y > 0 + this.height/2)
 			{
 				this.bIsUp = true;
 				this.bIsDown = false;
