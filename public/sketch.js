@@ -1,6 +1,6 @@
 var canvas;
 var scl = 64;
-var vampire, sparkles, mouse, gaze, coin, shop, castle;	// Classes
+var vampire, sparkles, mouse, gaze, coin, heart, shop, castle;	// Classes
 var previousMillis = 0;
 var previousMillisCoin = 0;
 var previousMillisHammer = 0;
@@ -20,6 +20,7 @@ function setup()
 
 	sparkles = new Sparkles();
 	coin = new Coin();
+	heart = new Heart();
 	
 	shop = new Shop();
 	castle = new Castle();
@@ -30,6 +31,7 @@ function setup()
 	sparkles.draw();
 	coin.coins = new Group();
 	coin.drawUiCoin();
+	heart.draw();
 
 	vampire = new Vampire();
 	mouse = new Mouse();
@@ -90,6 +92,7 @@ function start()
 	}
 	coin.coinUI_1.removed = false;
 	coin.coinUI_2.removed = false;
+	heart.heart.removed = false;
 	mouse.eye.removed = false;
 	vampire.vampire.removed = false;
 
@@ -162,6 +165,7 @@ function draw() {
 		}
 		coin.coinUI_1.removed = true;
 		coin.coinUI_2.removed = true;
+		heart.heart.removed = true;
 		mouse.eye.removed = true;
 		vampire.vampire.removed = true;
 
@@ -172,24 +176,6 @@ function draw() {
 
 		drawSprites();
 		
-
-		/*if(keyWentDown("Enter") || mouseWentDown(LEFT))
-    	{
-			bIsMenuScreen = false;
-			bIsGameScreen = true;
-
-			logo.removed = true;
-			logoEng.removed = true;
-			
-			shop.shop.removed = false;
-			castle.castle.removed = false;
-			sparkles.sparkle.removed = false;
-			coin.removed = false;
-			coin.coinUI_1.removed = false;
-			coin.coinUI_2.removed = false;
-			mouse.eye.removed = false;
-			vampire.vampire.removed = false;
-		}*/
 	}
 	else if(bIsGameScreen== true)
 	{
@@ -273,7 +259,9 @@ function debug()
 	push();
 	fill(255, 255, 0);
 	textSize(32);
-	text("      : " + coin.coinTotal, 15, 35);
+	text(": " + coin.coinTotal, 75, 35);
+	fill(255,0,0);
+	text(": " + heart.lives, 85, 100);
 	/*text("EyePos: " + dotX + "," + dotY, 15, 75);
 	text("MousePos: " + mouseX.toFixed(2) + "," + mouseY.toFixed(2), 15, 100);
 	text("FrameRate: " + frameRate().toFixed(2), 15, 125);
