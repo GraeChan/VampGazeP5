@@ -7,8 +7,10 @@ var previousMillisHammer = 0;
 var interval = 3000;
 var bIsGameScreen = false;
 var bIsMenuScreen = true;
-var logo;
-var logoSprite;
+var bIsHelpScreen = false;
+var bIsCreditsScreen = false;
+var logo, title;
+var logoSprite, titleSprite;
 var bIsEye = true;
 
 function setup() 
@@ -32,11 +34,96 @@ function setup()
 	mouse = new Mouse();
 	//gaze = new Gaze();
 
-	logo = createSprite(innerWidth-250,innerHeight-126);
+	logo = createSprite(innerWidth-250,775);
 	logoSprite = loadImage("sprites/napierLogo.gif");
+	title = createSprite(innerWidth/2,400/2);
+	titleSprite = loadImage("sprites/title.png");
+
+	buttonStart = createButton('START');
+  	buttonStart.position(innerWidth/2 - 100, innerHeight/2);
+	buttonStart.size(200,50);
+  	buttonStart.mousePressed(start);
+	
+	buttonHelp = createButton('HELP');
+  	buttonHelp.position(innerWidth/2 - 100, innerHeight/2 + 75);
+	buttonHelp.size(200,50);
+  	buttonHelp.mousePressed(help);
+	
+	buttonCredits = createButton('CREDITS');
+  	buttonCredits.position(innerWidth/2 - 100, innerHeight/2 + 150);
+	buttonCredits.size(200,50);
+  	buttonCredits.mousePressed(credits);
+
+	buttonBack = createButton('BACK');
+  	buttonBack.position(innerWidth/2 - 100, innerHeight/2 + 150);
+	buttonBack.size(200,50);
+  	buttonBack.mousePressed(back);
 
 	frameRate(30);
 } 
+
+function start()
+{
+	bIsMenuScreen = false;
+	bIsGameScreen = true;
+	bIsHelpScreen = false;
+	bIsCreditsScreen = false;
+
+	logo.removed = true;
+	title.removed = true;
+	
+	shop.shop.removed = false;
+	castle.castle.removed = false;
+	sparkles.sparkle.removed = false;
+	coin.removed = false;
+	coin.coinUI_1.removed = false;
+	coin.coinUI_2.removed = false;
+	mouse.eye.removed = false;
+	vampire.vampire.removed = false;
+
+	buttonStart.hide();
+	buttonHelp.hide();
+	buttonCredits.hide();
+	buttonBack.hide();
+}
+
+function help()
+{
+	bIsMenuScreen = false;
+	bIsGameScreen = false;
+	bIsHelpScreen = true;
+	bIsCreditsScreen = false;
+
+	buttonStart.hide();
+	buttonHelp.hide();
+	buttonCredits.hide();
+	buttonBack.show();
+
+	
+}
+
+function credits()
+{
+	bIsMenuScreen = false;
+	bIsGameScreen = false;
+	bIsHelpScreen = false;
+	bIsCreditsScreen = true;
+
+	buttonStart.hide();
+	buttonHelp.hide();
+	buttonCredits.hide();
+	buttonBack.show();
+
+	
+}
+
+function back()
+{
+	bIsMenuScreen = true;
+	bIsGameScreen = false;
+	bIsHelpScreen = false;
+	bIsCreditsScreen = false;
+}
 
 function draw() {
 	background(44,176,55);
@@ -44,18 +131,16 @@ function draw() {
 	if(bIsMenuScreen == true)
 	{
 		push();
-			fill(255, 255, 0);
+			//fill(255, 255, 0);
 			textSize(32);
-			text("Vampire's Gaze", innerWidth/2 - 25, 50);
-			text("吸血鬼の視線" , innerWidth/2 - 25, 100);
-			text("Avoid the Vampire's Gaze", 150, 250);
-			text("Collect Coins", 150, 300);
-			text("Buy Hammer to Chase and Defeat Vampire", 150, 350);
-			text("Press Enter or Click Left Mouse Button to Start", 150, 500);
+			text("Graeme Alexander Burr - 40291449", innerWidth/2 - 250, 800);
 		pop();
 
 		logo.removed = false;
-		logo.addImage(this.logoSprite	);
+		logo.addImage(this.logoSprite);
+		title.removed = false;
+		title.addImage(this.titleSprite);
+		title.position.x += sin(frameCount/10);
 
 		shop.shop.removed = true;
 		castle.castle.removed = true;
@@ -66,15 +151,21 @@ function draw() {
 		mouse.eye.removed = true;
 		vampire.vampire.removed = true;
 
+		buttonStart.show();
+		buttonHelp.show();
+		buttonCredits.show();
+		buttonBack.hide();
+
 		drawSprites();
 		
 
-		if(keyWentDown("Enter") || mouseWentDown(LEFT))
+		/*if(keyWentDown("Enter") || mouseWentDown(LEFT))
     	{
 			bIsMenuScreen = false;
 			bIsGameScreen = true;
 
 			logo.removed = true;
+			logoEng.removed = true;
 			
 			shop.shop.removed = false;
 			castle.castle.removed = false;
@@ -84,7 +175,7 @@ function draw() {
 			coin.coinUI_2.removed = false;
 			mouse.eye.removed = false;
 			vampire.vampire.removed = false;
-		}
+		}*/
 	}
 	else if(bIsGameScreen== true)
 	{
@@ -118,8 +209,31 @@ function draw() {
     	{
 			bIsGameScreen = false;
 			bIsMenuScreen = true;
+			bIsEye = true;
 		}
 		
+	}
+	else if(bIsHelpScreen == true)
+	{
+		push();
+			//fill(255, 255, 0);
+			textSize(32);
+			
+			text("Avoid the Vampire's Gaze", innerWidth/2-250, 250);
+			text("Collect Coins", innerWidth/2 - 250, 350);
+			text("Buy Hammer to Chase and Defeat Vampire", innerWidth/2-250, 450);
+		
+		pop();
+	}
+	else if(bIsCreditsScreen == true)
+	{
+		push();
+			//fill(255, 255, 0);
+			textSize(32);
+			text("Game Programming by Graeme Burr", innerWidth/2-250, 250);
+			text("Gaze Track library by Augusto Esteves - Obrigado", innerWidth/2 - 250, 350);
+			text("Artwork by Mai Mishima - Arigatou", innerWidth/2-250, 450);
+		pop();
 	}
 	
 	
