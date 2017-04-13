@@ -27,6 +27,8 @@ function Mouse()
         this.targetY = mouseY;
         var diffY = this.targetY - this.y;
         this.y += diffY * this.easing;
+
+        
         
         this.eye.position.x = this.x;
         this.eye.position.y = this.y;
@@ -78,7 +80,14 @@ function Mouse()
             previousMillisHammer = currentMillis;
         }
 
-        
+        if(this.eye.overlap(vampire.vampire))
+        {
+            this.lookVamp();
+        }
+        else if(!this.eye.overlap(vampire.vampire))
+        {
+            previousMillisVamp = currentMillis;
+        }
     }
 
     this.check = function()
@@ -151,6 +160,49 @@ function Mouse()
             previousMillisHammer = currentMillis;
         }
         
+    }
+
+    this.lookVamp = function()
+    {
+        var currentMillis = millis();
+        if(currentMillis - previousMillisVamp > 1000)
+        {
+            if(bIsEye == true)
+            {
+                if(heart.lives > 0)
+                {
+                    heart.lives -=1;
+                }
+                else if(heart.lives <= 0)
+                {
+                    bIsGameScreen = false;
+                    bIsMenuScreen = false;
+                    bIsHelpScreen = false;
+                    bIsCreditsScreen = false;
+                    
+                    bIsWinScreen = false;
+                    bIsGameOverScreen = true;
+                }
+            }
+            else if(bIsEye == false)
+            {
+                if(vampire.lives > 0)
+                {
+                    vampire.lives -=1;
+                }
+                else if(vampire.lives <= 0)
+                {
+                    bIsGameScreen = false;
+                    bIsMenuScreen = false;
+                    bIsHelpScreen = false;
+                    bIsCreditsScreen = false;
+                    bIsGameOverScreen = false;
+                    bIsWinScreen = true;
+                }
+            }
+            
+            previousMillisVamp = currentMillis;
+        }
     }
 
 }

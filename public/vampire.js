@@ -3,6 +3,7 @@ function Vampire()
 	this.vampire = createSprite(this.x, this.y);
 	this.vampire.addAnimation("walk", "sprites/vampWalk1.png", "sprites/vampWalk2.png");
 	this.vampire.depth = 3;
+	this.lives = 3;
 	
 	this.x = window.innerWidth - 100;
 	this.y = 256;

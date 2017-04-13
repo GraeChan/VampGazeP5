@@ -4,11 +4,14 @@ var vampire, sparkles, mouse, gaze, coin, heart, shop, castle;	// Classes
 var previousMillis = 0;
 var previousMillisCoin = 0;
 var previousMillisHammer = 0;
+var previousMillisVamp = 0;
 var interval = 3000;
 var bIsGameScreen = false;
 var bIsMenuScreen = true;
 var bIsHelpScreen = false;
 var bIsCreditsScreen = false;
+var bIsGameOverScreen = false;
+var bIsWinScreen = false;
 var logo, title;
 var logoSprite, titleSprite;
 var bIsEye = true;
@@ -62,6 +65,8 @@ function setup()
 	buttonBack.size(200,50);
   	buttonBack.mousePressed(back);
 
+	
+
 	frameRate(30);
 } 
 
@@ -71,6 +76,9 @@ function start()
 	bIsGameScreen = true;
 	bIsHelpScreen = false;
 	bIsCreditsScreen = false;
+	bIsGameOverScreen = false;
+	bIsWinScreen = false;
+	bIsEye = true;
 
 	buttonStart.hide();
 	buttonHelp.hide();
@@ -95,7 +103,12 @@ function start()
 	heart.heart.removed = false;
 	mouse.eye.removed = false;
 	vampire.vampire.removed = false;
-
+	
+	heart.lives = 3;
+	vampire.lives = 3;
+	vampire.x = window.innerWidth - 100;
+	vampire.y = 256;
+	coin.coinTotal = 10;
 	
 }
 
@@ -105,6 +118,8 @@ function help()
 	bIsGameScreen = false;
 	bIsHelpScreen = true;
 	bIsCreditsScreen = false;
+	bIsGameOverScreen = false;
+	bIsWinScreen = false;
 
 	buttonStart.hide();
 	buttonHelp.hide();
@@ -120,21 +135,26 @@ function credits()
 	bIsGameScreen = false;
 	bIsHelpScreen = false;
 	bIsCreditsScreen = true;
+	bIsGameOverScreen = false;
+	bIsWinScreen = false;
 
 	buttonStart.hide();
 	buttonHelp.hide();
 	buttonCredits.hide();
 	buttonBack.show();
 
-	
 }
 
 function back()
 {
-	bIsMenuScreen = true;
+	bIsGameOverScreen = false;
 	bIsGameScreen = false;
 	bIsHelpScreen = false;
 	bIsCreditsScreen = false;
+	bIsWinScreen = false;
+	bIsMenuScreen = true;
+	
+	
 }
 
 function draw() {
@@ -195,7 +215,6 @@ function draw() {
 		//For Mouse Control
 		mouse.cursor();
 		mouse.hover();
-
 		mouse.check();
 
 		//For Gaze Control
@@ -209,6 +228,10 @@ function draw() {
     	{
 			bIsGameScreen = false;
 			bIsMenuScreen = true;
+			bIsHelpScreen = false;
+			bIsCreditsScreen = false;
+			bIsGameOverScreen = false;
+			bIsWinScreen = false;
 			bIsEye = true;
 		}
 		
@@ -234,6 +257,24 @@ function draw() {
 			text("Gaze Track library by Augusto Esteves - Obrigado", innerWidth/2 - 250, 350);
 			text("Artwork by Mai Mishima - Arigatou", innerWidth/2-250, 450);
 		pop();
+	}
+	else if(bIsGameOverScreen == true)
+	{
+		push();
+			//fill(255, 255, 0);
+			textSize(64);
+			text("Game Over", innerWidth/2-200, innerHeight/2);
+		pop();
+		buttonBack.show();
+	}
+	else if(bIsWinScreen == true)
+	{
+		push();
+			//fill(255, 255, 0);
+			textSize(64);
+			text("Congratualtions", innerWidth/2-250, innerHeight/2);
+		pop();
+		buttonBack.show();
 	}
 	
 	
